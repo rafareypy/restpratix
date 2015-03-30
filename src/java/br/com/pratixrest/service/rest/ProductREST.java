@@ -6,9 +6,15 @@
 package br.com.pratixrest.service.rest;
 
 import br.com.pratixrest.model.Product;
+import br.com.pratixrest.model.Resp;
 import br.com.restpratix.service.ProductServiceImpl;
 import br.com.restpratix.service.interfaces.ProductService;
 import com.google.gson.Gson;
+import java.awt.image.RescaleOp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -26,7 +32,7 @@ import javax.ws.rs.core.Response;
  * @author pontocom
  */
 @Path("product")
-public class ProductREST {
+public class ProductREST extends BaseRest{
 
     
     
@@ -48,6 +54,13 @@ public class ProductREST {
         return Response.ok(new Gson().toJson(productService.getListProduct()), MediaType.APPLICATION_JSON).build();                
     }
 
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response getJson(@PathParam("id") Integer id) {            
+        return Response.ok(new Gson().toJson(productService.getProduct(id)), MediaType.APPLICATION_JSON).build();                
+    }    
+    
     /**
      * PUT method for updating or creating an instance of ProductREST
      * @param content representation for the resource
@@ -58,20 +71,20 @@ public class ProductREST {
     @Consumes({ "application/json"})
     public Response  putJson(@PathParam("id") Integer id, Product product) {
         
-        
-        return Response.
-        
-//        try {
-//            product.setId(id);
-//            productService.udpateProduct(product);
-//            return Response.ok(new Gson().toJson(product), MediaType.WILDCARD_TYPE).build();
-//            //return Response.ok(new Gson().toJson(product), MediaType.WILDCARD_TYPE);/
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.out.println("Error in update ProductREST \n " + e.getMessage()  );
-//            return Response.serverError().entity(e.getMessage()).build();
-//            //return Response.status(Response.Status.NOT_FOUND).entity("Resource not found for ID: " + ).build();
-//        }        
+        try {
+            product.setId(id);
+            productService.udpateProduct(product);
+            Map<String , Object > resul = new HashMap<String, Object >();
+            resul.put("id", product.getId());
+            
+            
+            return returnTrue(new Gson().toJson(product), new Gson().toJson(resul));            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error in update ProductREST \n " + e.getMessage()  );
+            return returnFalse(e.getMessage(), null);
+        }        
         
         
         
@@ -81,28 +94,34 @@ public class ProductREST {
     @Consumes({"application/json"})
     public Response create(Product product) {
 
-//        try {
-//            productService.saveProduct(product);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.out.println("Error in create ProductREST \n " + e.getMessage()  );
-//        }
-//                
-        return Response.ok(new Gson().toJson(new Product("product one")), MediaType.APPLICATION_JSON).build();
+        try {
+            productService.saveProduct(product);
+            
+            return returnTrue( "Product created success", new Gson().toJson(product.getId()) );
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error in create ProductREST \n " + e.getMessage()  );
+            return returnFalse("Product created success", new Gson().toJson(product.getId()) );
+        }
         
     }    
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Integer id) {
+    public Response remove(@PathParam("id") Integer id) {
         
         System.out.println("Delete product params : " + id);
         
         try {
             productService.deleteProduct(id);
+
+            return returnTrue("Register removed", "Register removed" );            
+                        
         } catch (Exception e) {
             System.out.println("Error in delete product ");
             e.printStackTrace();
+            return returnFalse("Register not removed", new Gson().toJson(id) );            
         }
     }
     
