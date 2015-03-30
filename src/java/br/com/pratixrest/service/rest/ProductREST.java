@@ -17,6 +17,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -42,8 +44,8 @@ public class ProductREST {
      */
     @GET
     @Produces("application/json")
-    public String getJson() {       
-        return new Gson().toJson(productService.getListProduct());        
+    public Response getJson() {            
+        return Response.ok(new Gson().toJson(productService.getListProduct()), MediaType.APPLICATION_JSON).build();                
     }
 
     /**
@@ -54,29 +56,40 @@ public class ProductREST {
     @PUT
     @Path("{id}")
     @Consumes({ "application/json"})
-    public void putJson(@PathParam("id") Integer id, Product product) {
+    public Response  putJson(@PathParam("id") Integer id, Product product) {
         
-        try {
-            product.setId(id);
-            productService.udpateProduct(product);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error in update ProductREST \n " + e.getMessage()  );
-        }        
+        
+        return Response.
+        
+//        try {
+//            product.setId(id);
+//            productService.udpateProduct(product);
+//            return Response.ok(new Gson().toJson(product), MediaType.WILDCARD_TYPE).build();
+//            //return Response.ok(new Gson().toJson(product), MediaType.WILDCARD_TYPE);/
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("Error in update ProductREST \n " + e.getMessage()  );
+//            return Response.serverError().entity(e.getMessage()).build();
+//            //return Response.status(Response.Status.NOT_FOUND).entity("Resource not found for ID: " + ).build();
+//        }        
+        
+        
         
     }
     
     @POST    
     @Consumes({"application/json"})
-    public void create(Product product) {
+    public Response create(Product product) {
 
-        try {
-            productService.saveProduct(product);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error in create ProductREST \n " + e.getMessage()  );
-        }
-                
+//        try {
+//            productService.saveProduct(product);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("Error in create ProductREST \n " + e.getMessage()  );
+//        }
+//                
+        return Response.ok(new Gson().toJson(new Product("product one")), MediaType.APPLICATION_JSON).build();
+        
     }    
 
     @DELETE

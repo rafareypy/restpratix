@@ -38,6 +38,11 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
+    public Product(String name ) {
+        this.name = name ;
+    }
+    
+    
     public Product() {
     }
 
