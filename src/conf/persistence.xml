@@ -3,7 +3,7 @@
   <persistence-unit name="restpratixPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.com.pratixrest.model.Product</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pratixapi"/>
       <property name="javax.persistence.jdbc.password" value="pcom919491949"/>

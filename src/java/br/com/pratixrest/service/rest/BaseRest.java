@@ -25,6 +25,8 @@ public class BaseRest {
             result.put("message","Product created succcess");
             result.put("data",json);
                         
+            
+            
             return Response.ok(new Gson().toJson(result), MediaType.APPLICATION_JSON).build();
     }
 

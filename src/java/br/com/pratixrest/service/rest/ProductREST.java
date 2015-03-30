@@ -51,14 +51,26 @@ public class ProductREST extends BaseRest{
     @GET
     @Produces("application/json")
     public Response getJson() {            
-        return Response.ok(new Gson().toJson(productService.getListProduct()), MediaType.APPLICATION_JSON).build();                
+        try{
+            return returnTrue("ok", new Gson().toJson(productService.getListProduct()));
+        } catch (Exception e) {
+            return returnFalse(e.getMessage(), "error");        
+        }
+        
     }
 
     @GET
     @Path("{id}")
     @Produces("application/json")
     public Response getJson(@PathParam("id") Integer id) {            
-        return Response.ok(new Gson().toJson(productService.getProduct(id)), MediaType.APPLICATION_JSON).build();                
+        
+        try {
+            return returnTrue("ok", new Gson().toJson(productService.getProduct(id)));        
+        } catch (Exception e) {
+            return returnFalse(e.getMessage(), new Gson().toJson(id));        
+        }
+        
+        
     }    
     
     /**
@@ -76,7 +88,6 @@ public class ProductREST extends BaseRest{
             productService.udpateProduct(product);
             Map<String , Object > resul = new HashMap<String, Object >();
             resul.put("id", product.getId());
-            
             
             return returnTrue(new Gson().toJson(product), new Gson().toJson(resul));            
 
@@ -110,8 +121,6 @@ public class ProductREST extends BaseRest{
     @DELETE
     @Path("{id}")
     public Response remove(@PathParam("id") Integer id) {
-        
-        System.out.println("Delete product params : " + id);
         
         try {
             productService.deleteProduct(id);
