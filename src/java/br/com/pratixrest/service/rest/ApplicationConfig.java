@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(br.com.pratixrest.service.rest.ProductREST.class);
+        resources.add(br.com.pratixrest.service.rest.JaxRsFilter.class);
     }
     
 }
