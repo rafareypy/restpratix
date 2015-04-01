@@ -7,6 +7,7 @@ package br.com.restpratix.service;
 
 
 import br.com.pratixrest.util.JPAUtil;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +46,17 @@ public class BasicService  implements java.io.Serializable {
     }
     return qr;
 }
+ 
+    public <T> T getPojo(Class<T> classToCast,String query,Object... values) {
+        Query qr = createQuery(query, values);
+        return (T) qr.getSingleResult();
+    }
+    
+    public <T> T getPojo(Class<T> classToCast,Serializable primaryKey) {
+        T objeto = em.find(classToCast, primaryKey);
+        em.refresh(objeto);
+        return objeto ;
+    }    
     
     public void sysou(String message){
         System.out.println(" \n " + message );

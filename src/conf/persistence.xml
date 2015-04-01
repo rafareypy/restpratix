@@ -3,6 +3,7 @@
   <persistence-unit name="restpratixPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.com.pratixrest.model.Product</class>
+    <class>br.com.pratixrest.model.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="one"/>
