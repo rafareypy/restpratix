@@ -24,10 +24,20 @@ public class UserServiceImpl extends BasicService implements UserService{
         user.setPassword(Utils.md5(user.getPassword()));
         user.setToken(Utils.md5(user.getName()) +":"+Utils.md5(user.getPassword()));
         
-        getEm().getTransaction().begin();
-        getEm().persist(user);
-        getEm().getTransaction().commit();
-        getEm().close();
+        try {
+            getEm().getTransaction().begin();
+            getEm().persist(user);
+            getEm().getTransaction().commit();
+        } catch (Exception e) {
+            if(getEm().isOpen())
+                getEm().getTransaction().rollback();                                    
+            
+        }finally{
+            if(getEm().isOpen())
+                getEm().close();            
+        }
+        
+
         return user ;
     }
 
@@ -36,10 +46,20 @@ public class UserServiceImpl extends BasicService implements UserService{
         user.setPassword(Utils.md5(user.getPassword()));
         user.setToken(Utils.md5(user.getName()) +":"+Utils.md5(user.getPassword()));
         
-        getEm().getTransaction().begin();
-        getEm().persist(user);
-        getEm().getTransaction().commit();
-        getEm().close();
+        try {
+            getEm().getTransaction().begin();
+            getEm().persist(user);
+            getEm().getTransaction().commit();
+        } catch (Exception e) {
+            if(getEm().isOpen())
+                getEm().getTransaction().rollback();                                    
+        }finally{
+            if(getEm().isOpen())
+                getEm().close();
+            
+        }
+        
+
         
         return user ;        
     }
@@ -51,10 +71,14 @@ public class UserServiceImpl extends BasicService implements UserService{
             getEm().getTransaction().begin();
             getEm().remove(user);
             getEm().getTransaction().commit();
-            getEm().close();
             return true ;
         } catch (Exception e) {
+            if(getEm().isOpen())
+                getEm().getTransaction().rollback();            
             return false;
+        }finally{
+            if(getEm().isOpen())
+                getEm().close();            
         }
         
     }
@@ -66,12 +90,18 @@ public class UserServiceImpl extends BasicService implements UserService{
         try {
             getEm().getTransaction().begin();
             getEm().remove(user);
-            getEm().getTransaction().commit();
-            getEm().close();
+            getEm().getTransaction().commit();            
             return true ;
         } catch (Exception e) {
-            return false;
-        }        
+            if(getEm().isOpen())
+                getEm().getTransaction().rollback();                                    
+            
+            return false ;
+        }finally{
+            if(getEm().isOpen())
+                getEm().close();
+            
+        }
     }
 
     @Override
@@ -102,6 +132,8 @@ public class UserServiceImpl extends BasicService implements UserService{
 
             result = (User) query.getSingleResult();          
             
+            
+            getEm().close();
             
         } catch (Exception e) {
             sysou(e.getMessage());
