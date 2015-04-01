@@ -22,10 +22,8 @@ public class BaseRest {
             
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("success",Boolean.TRUE);
-            result.put("message","Product created succcess");
+            result.put("message",message);
             result.put("data",json);
-                        
-            
             
             return Response.ok(new Gson().toJson(result), MediaType.APPLICATION_JSON).build();
     }

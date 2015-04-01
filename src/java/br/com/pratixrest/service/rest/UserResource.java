@@ -5,16 +5,13 @@
  */
 package br.com.pratixrest.service.rest;
 
-import br.com.pratixrest.model.Product;
 import br.com.pratixrest.model.User;
 import br.com.restpratix.service.UserServiceImpl;
 import br.com.restpratix.service.interfaces.UserService;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -50,23 +47,9 @@ public class UserResource extends BaseRest{
     @GET
     @Produces("application/json")
     public Response getJson() {
-
         
-        System.out.println("getJson");
-        
-        List<User> list = new ArrayList<User>();
-        
-        for (int i = 0; i < 10; i++) {
-            User user = new User(i);
-            user.setName("Name " + i );
-            user.setPassword("password " + i );
-            user.setToken("token " + i);
-            list.add(user);
-        }
-        
-       
-            
-        
+        List<User> list = userService.getListUser();
+                
         return returnTrue("success", list);
         
     }

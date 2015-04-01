@@ -93,16 +93,7 @@ public class UserServiceImpl extends BasicService implements UserService{
     public User getUserByToken(String token) {
         
         User result = null ;
-        
-        
-//        System.out.println("token");
-//        System.out.println(token);
-//        System.out.println("2f5ebb0642cfa2a25af21fac655b30eb:14e1b600b1fd579f47433b88e8d85291");
-//        
-//        System.out.println("user id");
-//        System.out.println(user.getId());
-        
-        
+                
         try {
             
             Query query = getEm().createNamedQuery("User.findByToken")
