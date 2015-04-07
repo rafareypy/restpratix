@@ -3,13 +3,15 @@
   <persistence-unit name="pratixPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>br.com.pratixrest.model.Product</class>
+    <class>br.com.pratixrest.model.IcmsCst</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.canonicalmodel.subpackage" value="one"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pratixapi"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/pratixapi3"/>
       <property name="javax.persistence.jdbc.password" value="pcom919491949"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

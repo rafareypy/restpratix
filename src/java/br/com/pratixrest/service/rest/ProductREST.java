@@ -5,16 +5,18 @@
  */
 package br.com.pratixrest.service.rest;
 
+import br.com.pratixrest.model.IcmsCst;
 import br.com.pratixrest.model.Product;
-import br.com.pratixrest.model.Resp;
+import br.com.restpratix.service.IcmsCstServiceImpl;
 import br.com.restpratix.service.ProductServiceImpl;
+import br.com.restpratix.service.interfaces.IcmsCstService;
 import br.com.restpratix.service.interfaces.ProductService;
+
 import com.google.gson.Gson;
-import java.awt.image.RescaleOp;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,7 +25,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -51,11 +52,44 @@ public class ProductREST extends BaseRest{
     @GET
     @Produces("application/json")
     public Response getJson() {            
+        
+        
+//        IcmsCstService icmsCstService = new IcmsCstServiceImpl();
+//        
+//        
+//        try {
+//
+//                System.out.println("Saving icms");
+//            
+//                IcmsCst icmsCst = new IcmsCst();
+//                icmsCst.setAcronym("acron");
+//                icmsCst.setCode(1);
+//                icmsCst.setDescription("description");
+//                icmsCst.setMandatoryCofins(Boolean.TRUE);
+//                icmsCst.setMandatoryIcms(true);
+//                icmsCst.setMandatoryPis(true);
+//                icmsCst.setMandatoryReducao(true);
+//                icmsCst.setTypeTribute(1);
+//            
+//                icmsCstService.saveIcmsCst(icmsCst);
+//                
+//                System.out.println("Cod save ");
+//                System.out.println(icmsCst.getId());
+//                
+//        } catch (Exception e) {
+//            System.out.println("Error saving icms");
+//            System.out.println(e.getMessage());
+//            e.printStackTrace();
+//        }
+        
         try{
             return returnTrue("ok", new Gson().toJson(productService.getListProduct()));
         } catch (Exception e) {
+            e.printStackTrace();
             return returnFalse(e.getMessage(), "error");        
         }
+       
+        
         
     }
 

@@ -57,12 +57,12 @@ public class ProductServiceImpl extends BasicService implements ProductService, 
     
     @Override
     public List<Product> getListProduct() {
-        return getEm().createQuery("from Product").getResultList();
+        return getEm().createNamedQuery("Product.findAll", Product.class).getResultList();
     }
     
     @Override
     public List<Product> getListProductByName(String name) {
-        return getEm().createQuery("from Product ").getResultList();
+        return getEm().createQuery("SELECT p FROM Product p").getResultList();
     }
 
     @Override
