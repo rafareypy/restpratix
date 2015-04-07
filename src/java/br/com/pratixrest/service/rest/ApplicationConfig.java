@@ -28,8 +28,9 @@ public class ApplicationConfig extends Application {
      * all resources defined in the project.
      * If required, comment out calling this method in getClasses().
      */
-    private void addRestResourceClasses(Set<Class<?>> resources) {
+    private void addRestResourceClasses(Set<Class<?>> resources) {        
         resources.add(br.com.pratixrest.service.rest.JaxRsFilter.class);
+        resources.add(br.com.pratixrest.service.rest.NfeResource.class);
         resources.add(br.com.pratixrest.service.rest.ProductREST.class);
         resources.add(br.com.pratixrest.service.rest.UserResource.class);
     }
