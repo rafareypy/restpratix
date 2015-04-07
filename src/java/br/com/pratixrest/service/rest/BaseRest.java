@@ -18,14 +18,12 @@ import javax.ws.rs.core.Response;
  */
 public class BaseRest {
     
-    public Response returnTrue(String message, String json){
+    public Response returnTrue(String message, Object json){
             
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("success",Boolean.TRUE);
-            result.put("message","Product created succcess");
+            result.put("message",message);
             result.put("data",json);
-                        
-            
             
             return Response.ok(new Gson().toJson(result), MediaType.APPLICATION_JSON).build();
     }
@@ -51,7 +49,7 @@ public class BaseRest {
     }
 
 
-    public Response returnFalse( String message, String json){
+    public Response returnFalse( String message, Object json){
             
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("success",Boolean.FALSE);
