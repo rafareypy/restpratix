@@ -27,12 +27,12 @@ public class JaxRsFilter implements ContainerRequestFilter, ContainerResponseFil
         
         String token = requestContext.getHeaderString("Authorization") ;
         
-        UserService  userService = new UserServiceImpl();
-        
-        User user = userService.getUserByToken(token);
-                
-        if(user == null || user.getId() == null)
-            requestContext.abortWith( Response.status( Response.Status.UNAUTHORIZED ).build() );
+//        UserService  userService = new UserServiceImpl();
+//        
+//        User user = userService.getUserByToken(token);
+//                
+//        if(user == null || user.getId() == null)
+//            requestContext.abortWith( Response.status( Response.Status.UNAUTHORIZED ).build() );
         
     }
 
