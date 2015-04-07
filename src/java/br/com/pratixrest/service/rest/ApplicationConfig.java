@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(br.com.pratixrest.service.rest.JaxRsFilter.class);
         resources.add(br.com.pratixrest.service.rest.NfeResource.class);
         resources.add(br.com.pratixrest.service.rest.ProductREST.class);
+        resources.add(br.com.pratixrest.service.rest.TestingResource.class);
         resources.add(br.com.pratixrest.service.rest.UserResource.class);
     }
     

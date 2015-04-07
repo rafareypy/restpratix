@@ -5,13 +5,11 @@
  */
 package br.com.pratixrest.service.rest;
 
-import br.com.pratixrest.model.IcmsCst;
+
 import br.com.pratixrest.model.Product;
 
-import br.com.restpratix.service.IcmsCstServiceImpl;
 
 import br.com.restpratix.service.ProductServiceImpl;
-import br.com.restpratix.service.interfaces.IcmsCstService;
 import br.com.restpratix.service.interfaces.ProductService;
 
 import com.google.gson.Gson;
